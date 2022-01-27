@@ -12,23 +12,39 @@ $ rm -rf any_worker any_node any_node_example
 $ cd ../../
 ```
 
-Note: The CMakeLists.txt needs to be symbolic link locally.
+Note: The CMakeLists.txt will be linked by catkin_make.
 ```bash
-$ cd src && rm CMakeLists.txt
 $ ln -s /opt/ros/noetic/share/catkin/cmake/toplevel.cmake CMakeLists.txt
 ```
 
 ### Building with catkin
 ```bash
 $ catkin_make -DCMAKE_BUILD_TYPE=Release
+$ source devel/setup.bash
 ```
 
-### Running
+### Running for KITTI dataset
 ```bash
 $ roslaunch elevation_mapping_demos kitti.launch
 $ roslaunch traversability_estimation kitti.launch
 $ rosrun traversability_projection traversability_projection_node
-$ rosrun dataset_ros_player kitti_player_mini_node
+$ rosrun dataset_ros_player kitti_odom_node
+```
+
+### Running for ZED camera
+```bash
+$ roslaunch elevation_mapping_demos zed.launch
+$ roslaunch traversability_estimation zed.launch
+$ rosrun traversability_projection traversability_projection_node
+$ rosrun dataset_ros_player zed_node
+```
+
+### Running for Spot dataset
+```bash
+$ roslaunch elevation_mapping_demos spot.launch
+$ roslaunch traversability_estimation spot.launch
+$ rosrun traversability_projection traversability_projection_node
+$ rosrun dataset_ros_player spot_node
 ```
 
 ### Running for MiniCheetah

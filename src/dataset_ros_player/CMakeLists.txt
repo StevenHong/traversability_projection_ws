@@ -147,6 +147,10 @@ add_executable(mini_cheetah_node
   src/mini_cheetah_node.cpp
 )
 
+add_executable(spot_node
+  src/spot_node.cpp
+)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -164,6 +168,11 @@ target_link_libraries(kitti_odom_node
 )
 
 target_link_libraries(mini_cheetah_node
+   ${catkin_LIBRARIES}
+   ${OpenCV_LIBRARIES}
+)
+
+target_link_libraries(spot_node
    ${catkin_LIBRARIES}
    ${OpenCV_LIBRARIES}
 )

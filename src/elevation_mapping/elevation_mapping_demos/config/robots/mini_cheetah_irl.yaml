@@ -1,0 +1,34 @@
+input_sources:
+  camera:
+    type: pointcloud
+    topic: /camera/aligned_depth_to_color/points
+    queue_size: 10
+    publish_on_update: false
+    sensor_processor:
+      type: structured_light
+      cutoff_min_depth: 0.2
+      cutoff_max_depth: 12.25
+      normal_factor_a: 0.000611
+      normal_factor_b: 0.003587
+      normal_factor_c: 0.3515
+      normal_factor_d: 0
+      normal_factor_e: 1
+      lateral_factor: 0.01576 # approx 1 deg
+      ignore_points_above: 2.0
+
+map_frame_id: "map"
+robot_base_frame_id: "/camera_color_optical_frame"
+robot_pose_with_covariance_topic: "/color_camera_pose"
+robot_pose_cache_size: 750
+robot_joint_state_cache_size: 12500
+track_point_frame_id: "/camera_color_optical_frame"
+track_point_x: 0.0
+track_point_y: 0.0
+track_point_z: 0.0
+time_tolerance: 0.5
+robot_motion_map_update/covariance_scale_translation_x: 0.0
+robot_motion_map_update/covariance_scale_translation_y: 0.0
+robot_motion_map_update/covariance_scale_translation_z: 0.0
+robot_motion_map_update/covariance_scale_rotation_x: 0.0
+robot_motion_map_update/covariance_scale_rotation_y: 0.0
+robot_motion_map_update/covariance_scale_rotation_z: 0.0

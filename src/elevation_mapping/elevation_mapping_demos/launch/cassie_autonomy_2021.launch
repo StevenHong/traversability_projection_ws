@@ -1,0 +1,25 @@
+<launch>
+
+  <!-- Elevation mapping node -->
+  <node pkg="elevation_mapping" type="elevation_mapping" name="elevation_mapping" output="screen">
+    <rosparam command="load" file="$(find elevation_mapping_demos)/config/robots/cassie.yaml" />
+    <rosparam command="load" file="$(find elevation_mapping_demos)/config/elevation_maps/wavefield.yaml" />
+    <rosparam command="load" file="$(find elevation_mapping_demos)/config/postprocessing/postprocessor_pipeline.yaml" />
+  </node>
+
+  <!-- Publish some static tf -->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="link0_broadcaster" args="-2.80412605413 0.80998723226 -0.806749795911 0.13307016614 0.0838591351643 0.981739163412 0.106996221224 /odom /map 100" /> -->
+  <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="-0.033 -0.094 0.351 0.003 0.005 -0.023 1.000 /cassie/vectorNav /velodyne 100" />
+  <node pkg="tf" type="static_transform_publisher" name="link2_broadcaster" args="0.12769599 -0.05160297 0.54439521 0.641999 -0.6174437 0.2927359 -0.3477157 /cassie/vectorNav /camera_color_optical_frame 100" />
+  <node pkg="tf" type="static_transform_publisher" name="link3_broadcaster" args="0.015 0.000 0.000 0.000 0.002 0.000 1.000 /camera_color_optical_frame /camera_depth_optical_frame 100" />
+
+  <!-- Play a ros bag -->
+  <node pkg="rosbag" type="play" name="rosbag" args="--clock -s 65 /home/ganlu/2021-03-23-18-24-09-wavefield.bag"/>
+  
+  <!-- Launch visualizations for the resulting elevation map -->
+  <include file="$(find elevation_mapping_demos)/launch/visualization.launch" />
+
+  <!-- Launch RViz with the demo configuration -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find elevation_mapping_demos)/rviz/cassie.rviz" />
+
+</launch>

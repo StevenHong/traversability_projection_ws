@@ -1,0 +1,20 @@
+input_sources:
+  lidar: # A name to identify the input source
+    type: pointcloud # Supported types: pointcloud
+    topic: /velodyne_points # your topic
+    queue_size: 5
+    publish_on_update: false # Whether to publish the elevation map after a callback from this source.
+    sensor_processor:
+      type: laser
+      min_radius: 0.018
+      beam_angle: 0.0006
+      beam_constant: 0.0015
+
+map_frame_id: "odom"
+robot_base_frame_id: "/cassie/pelvis"
+robot_pose_with_covariance_topic: "/cassie/pose"
+robot_pose_cache_size: 500
+track_point_frame_id: "/cassie/pelvis"
+track_point_x: 0.0
+track_point_y: 0.0
+track_point_z: 0.0

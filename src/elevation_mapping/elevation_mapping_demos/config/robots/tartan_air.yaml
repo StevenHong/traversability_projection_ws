@@ -1,0 +1,10 @@
+point_cloud_topic: "/points"
+sensor_frame_id: "left_camera"
+map_frame_id: "map"
+robot_base_frame_id: "left_camera"
+robot_pose_with_covariance_topic: "/pose"
+robot_pose_cache_size: 200
+track_point_frame_id: "left_camera"
+track_point_x: 0.0
+track_point_y: 0.0
+track_point_z: 0.0

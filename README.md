@@ -3,7 +3,7 @@
 Note: The CMakeLists.txt needs to be symbolic link locally.
 ```bash
 $ cd src && rm CMakeLists.txt
-$ ln -s /opt/ros/noetic/share/catkin/cmake/toplevel.cmake rm CMakeLists.txt
+$ ln -s /opt/ros/noetic/share/catkin/cmake/toplevel.cmake CMakeLists.txt
 ```
 
 ### Building with catkin

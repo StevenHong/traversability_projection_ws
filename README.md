@@ -3,10 +3,13 @@
 ### Building with catkin
 ```bash
 $ git clone --recursive git@github.com:StevenHong/traversability_projection_ws.git
+$ catkin_make -DCMAKE_BUILD_TYPE=Release
+```
+The following steps has been taken care of in the git commit.
+```bash
 $ cd traversability_projection_ws/src/any_node
 $ rm -rf any_worker any_node any_node_example
 $ cd ../../
-$ catkin_make -DCMAKE_BUILD_TYPE=Release
 ```
 
 ### Running

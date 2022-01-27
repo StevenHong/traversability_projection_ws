@@ -1,5 +1,11 @@
 # traversability_projection_ws
 
+Note: The CMakeLists.txt needs to be symbolic link locally.
+```bash
+$ cd src && rm CMakeLists.txt
+$ ln -s /opt/ros/noetic/share/catkin/cmake/toplevel.cmake rm CMakeLists.txt
+```
+
 ### Building with catkin
 ```bash
 $ git clone --recursive git@github.com:StevenHong/traversability_projection_ws.git

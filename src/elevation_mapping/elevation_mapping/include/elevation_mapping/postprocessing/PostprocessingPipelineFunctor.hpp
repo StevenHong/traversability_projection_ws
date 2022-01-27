@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include <ros/ros.h>
 #include <filters/filter_chain.h>
+#include <ros/ros.h>
 #include <grid_map_core/GridMap.hpp>
 
 namespace elevation_mapping {

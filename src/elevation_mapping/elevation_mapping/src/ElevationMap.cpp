@@ -585,14 +585,14 @@ bool ElevationMap::publishFusedElevationMap() {
   cachedFusedMaps_.push(fusedMapCopy);
   grid_map::GridMap cachedFusedMap = cachedFusedMaps_.front();
   std::cout << cachedFusedMaps_.size() << std::endl;
-  
-  if (fusedMapCopy.getTimestamp() - cachedFusedMap.getTimestamp() > 10e9) { // sec
+
+  if (fusedMapCopy.getTimestamp() - cachedFusedMap.getTimestamp() > 10e9) {  // sec
     ros::Time cachedFusedMapTime = ros::Time().fromNSec(cachedFusedMap.getTimestamp());
     std::string file_name = std::to_string(cachedFusedMapTime.toSec());
     std::string file_path = "/home/ganlu/minicheetah_irldata/" + file_name + ".xml";
     cv_bridge::CvImage image;
     cv::FileStorage fs(file_path, cv::FileStorage::WRITE);
-    
+
     grid_map::GridMapRosConverter::toCvImage(cachedFusedMap, "elevation", sensor_msgs::image_encodings::TYPE_32FC1, image);
     fs << "elevation" << image.image;
     grid_map::GridMapRosConverter::toCvImage(cachedFusedMap, "uncertainty_range", sensor_msgs::image_encodings::TYPE_32FC1, image);
@@ -603,15 +603,15 @@ bool ElevationMap::publishFusedElevationMap() {
     fs << "r" << rgb[0];
     fs << "g" << rgb[1];
     fs << "b" << rgb[2];
-    
+
     // Save past and future trajs
     ros::Time startTime, goalTime;
     bool startTimeSet = false;
-    fs << "past_traj" << "[";
+    fs << "past_traj"
+       << "[";
     for (unsigned int i = 0; i < pastTraj_.size(); ++i) {
       grid_map::Index index;
-      grid_map::Position position(pastTraj_[i]->pose.pose.position.x,
-                                  pastTraj_[i]->pose.pose.position.y);
+      grid_map::Position position(pastTraj_[i]->pose.pose.position.x, pastTraj_[i]->pose.pose.position.y);
       if (!cachedFusedMap.getIndexNoBuffer(position, index)) {
         continue;
       }
@@ -622,11 +622,11 @@ bool ElevationMap::publishFusedElevationMap() {
       fs << index(0) << index(1);
     }
     fs << "]";
-    fs << "future_traj" << "[";
+    fs << "future_traj"
+       << "[";
     for (unsigned int i = 0; i < futureTraj_.size(); ++i) {
       grid_map::Index index;
-      grid_map::Position position(futureTraj_[i]->pose.pose.position.x,
-                                  futureTraj_[i]->pose.pose.position.y);
+      grid_map::Position position(futureTraj_[i]->pose.pose.position.x, futureTraj_[i]->pose.pose.position.y);
       if (!cachedFusedMap.getIndexNoBuffer(position, index)) {
         continue;
       }
@@ -634,27 +634,27 @@ bool ElevationMap::publishFusedElevationMap() {
       fs << index(0) << index(1);
     }
     fs << "]";
-    
+
     // Save past and future power from robot joint states
-    fs << "past_power" << "[";
+    fs << "past_power"
+       << "[";
     for (unsigned int i = 0; i < pastJointStates_.size(); ++i) {
-      if (pastJointStates_[i]->header.stamp < startTime ||
-          pastJointStates_[i]->header.stamp > cachedFusedMapTime) {
+      if (pastJointStates_[i]->header.stamp < startTime || pastJointStates_[i]->header.stamp > cachedFusedMapTime) {
         continue;
       }
       for (unsigned int j = 0; j < 12; ++j) {
-        fs << pastJointStates_[i]->effort[j]*pastJointStates_[i]->velocity[j];
+        fs << pastJointStates_[i]->effort[j] * pastJointStates_[i]->velocity[j];
       }
     }
     fs << "]";
-    fs << "future_power" << "[";
+    fs << "future_power"
+       << "[";
     for (unsigned int i = 0; i < futureJointStates_.size(); ++i) {
-      if (futureJointStates_[i]->header.stamp < cachedFusedMapTime ||
-          futureJointStates_[i]->header.stamp > goalTime) {
+      if (futureJointStates_[i]->header.stamp < cachedFusedMapTime || futureJointStates_[i]->header.stamp > goalTime) {
         continue;
       }
       for (unsigned int j = 0; j < 12; ++j) {
-        fs << futureJointStates_[i]->effort[j]*futureJointStates_[i]->velocity[j];
+        fs << futureJointStates_[i]->effort[j] * futureJointStates_[i]->velocity[j];
       }
     }
     fs << "]";

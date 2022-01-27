@@ -22,8 +22,8 @@
 #include <boost/thread/recursive_mutex.hpp>
 
 // ROS
-#include <ros/ros.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
+#include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
 
 // Elevation Mapping

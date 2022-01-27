@@ -18,8 +18,8 @@
 #include <message_filters/cache.h>
 #include <message_filters/subscriber.h>
 #include <ros/ros.h>
-#include <sensor_msgs/PointCloud2.h>
 #include <sensor_msgs/JointState.h>
+#include <sensor_msgs/PointCloud2.h>
 #include <std_srvs/Empty.h>
 #include <tf/transform_listener.h>
 

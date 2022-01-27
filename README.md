@@ -78,11 +78,11 @@ An overview of the theoretical and implementation details has been
 published in [https://arxiv.org/abs/2106.14986]. To cite traversability_projection_ws in your academic
 research you can use the following BibTeX entry:
 
-@misc{gan2021multitask,
-      title={Multi-Task Learning for Scalable and Dense Multi-Layer Bayesian Map Inference}, 
-      author={Lu Gan and Youngji Kim and Jessy W. Grizzle and Jeffrey M. Walls and Ayoung Kim and Ryan M. Eustice and Maani Ghaffari},
-      year={2021},
-      eprint={2106.14986},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO}
-}
+      @misc{gan2021multitask,
+            title={Multi-Task Learning for Scalable and Dense Multi-Layer Bayesian Map Inference}, 
+            author={Lu Gan and Youngji Kim and Jessy W. Grizzle and Jeffrey M. Walls and Ayoung Kim and Ryan M. Eustice and Maani Ghaffari},
+            year={2021},
+            eprint={2106.14986},
+            archivePrefix={arXiv},
+            primaryClass={cs.RO}
+      }

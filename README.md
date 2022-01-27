@@ -21,6 +21,7 @@ $ ln -s /opt/ros/noetic/share/catkin/cmake/toplevel.cmake CMakeLists.txt
 ### Building with catkin
 ```bash
 $ catkin_make -DCMAKE_BUILD_TYPE=Release
+$ source devel/setup.bash
 ```
 
 ### Running

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+
+  <param name="use_sim_time" type="bool" value="true"/>
+
+  <!-- launch nodelet -->
+  <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager"/>
+  
+  <!-- launch nodelet loading file -->
+  <node pkg="nodelet" type="nodelet" name="Plus" args="load depth_image_proc/point_cloud_xyz nodelet_manager">
+    <remap from="camera_info" to="/camera/aligned_depth_to_color/camera_info" />
+    <remap from="image_rect" to="/camera/aligned_depth_to_color/image_raw" />
+    <remap from="points" to="/pointcloud_xyz" />
+  </node>
+  
+  <!-- launch tf publisher for camera position -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="camera_link_broadcaster" args="0.225 0.04 0.01 0 0.2292004 0 0.9733793 front_rail camera_link" />
+  
+  <!-- launch tf publisher for odom frame -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="odom_broadcaster" args="0 0 0 0 0 0 1 map odom" />
+
+  <!-- launch python publisher -->
+  <node pkg="dataset_ros_player" type="realsenseIntermediateTF.py" name="realsenseIntermediateTF" output="screen"/>
+
+</launch>

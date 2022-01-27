@@ -41,11 +41,13 @@ $ rosrun dataset_ros_player zed_node
 
 ### Running for Spot dataset
 ```bash
+$ roslaunch dataset_ros_player spot.launch
 $ roslaunch elevation_mapping_demos spot.launch
 $ roslaunch traversability_estimation spot.launch
 $ rosrun traversability_projection traversability_projection_node
-$ rosrun dataset_ros_player spot_node
+$ rosbag play spot_exp3.bag -r 0.5 --pause --clock -k
 ```
+Note: Need to run dataset_rosplayer package first for sim_time.
 
 ### Running for MiniCheetah
 ```bash

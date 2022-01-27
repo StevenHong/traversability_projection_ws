@@ -40,7 +40,7 @@ void TraversabilityProjection::colorDepthCallback(const sensor_msgs::ImageConstP
 
   // Fetch tf transform
   try {
-    tf_listener_.transformPointCloud("/map",
+    tf_listener_.transformPointCloud("map",
                                      cloud_msg.header.stamp,
                                      cloud1,
                                      cloud_msg.header.frame_id,
@@ -50,7 +50,7 @@ void TraversabilityProjection::colorDepthCallback(const sensor_msgs::ImageConstP
     return;
   }
   sensor_msgs::convertPointCloudToPointCloud2(cloud1, cloud_msg);
-  cloud_msg.header.frame_id = "/map";
+  cloud_msg.header.frame_id = "map";
 
   // Add msgs to queues
   cloud_queue_.push(cloud_msg);

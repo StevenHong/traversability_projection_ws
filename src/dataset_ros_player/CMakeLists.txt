@@ -151,6 +151,10 @@ add_executable(spot_node
   src/spot_node.cpp
 )
 
+add_executable(zed_node
+  src/zed_node.cpp
+)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -177,6 +181,11 @@ target_link_libraries(spot_node
    ${OpenCV_LIBRARIES}
 )
 
+target_link_libraries(zed_node
+   ${catkin_LIBRARIES}
+   ${OpenCV_LIBRARIES}
+)
+
 #############
 ## Install ##
 #############
@@ -186,10 +195,10 @@ target_link_libraries(spot_node
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+catkin_install_python(PROGRAMS
+  scripts/realsenseIntermediateTF.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html

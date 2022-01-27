@@ -1,10 +1,10 @@
-point_cloud_topic: "/spot_node/depth_image"
-sensor_frame_id: "depth_image"
-map_frame_id: "spot/odometry"
-robot_base_frame_id: "left_color_camera"
-robot_pose_with_covariance_topic: "/spot_node/left_color_camera_pose"
+point_cloud_topic: "/pointcloud_xyz"
+sensor_frame_id: "camera_color_optical_frame"
+map_frame_id: "map"
+robot_base_frame_id: "body"
+robot_pose_with_covariance_topic: "/realsense_pose_est"
 robot_pose_cache_size: 200
-track_point_frame_id: "left_color_camera"
+track_point_frame_id: "camera_color_optical_frame"
 track_point_x: 0.0
 track_point_y: 0.0
 track_point_z: 0.0

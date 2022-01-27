@@ -1,5 +1,10 @@
 # traversability_projection_ws
 
+### Download the package
+```bash
+$ git clone --recursive git@github.com:StevenHong/traversability_projection_ws.git
+```
+
 Note: The CMakeLists.txt needs to be symbolic link locally.
 ```bash
 $ cd src && rm CMakeLists.txt
@@ -8,7 +13,6 @@ $ ln -s /opt/ros/noetic/share/catkin/cmake/toplevel.cmake CMakeLists.txt
 
 ### Building with catkin
 ```bash
-$ git clone --recursive git@github.com:StevenHong/traversability_projection_ws.git
 $ catkin_make -DCMAKE_BUILD_TYPE=Release
 ```
 The following steps has been taken care of in the git commit.

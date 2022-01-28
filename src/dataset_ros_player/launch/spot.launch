@@ -10,9 +10,17 @@
   <node pkg="nodelet" type="nodelet" name="Plus" args="load depth_image_proc/point_cloud_xyz nodelet_manager">
     <remap from="camera_info" to="/camera/aligned_depth_to_color/camera_info" />
     <remap from="image_rect" to="/camera/aligned_depth_to_color/image_raw" />
-    <remap from="points" to="/pointcloud_xyz" />
+    <remap from="points" to="/pointcloud_xyz_full" />
   </node>
   
+  <node pkg="nodelet" type="nodelet" name="pointcloud_trim" args="load pcl/PassThrough nodelet_manager">
+    <param name="filter_limit_max" type="double" value="8.0"/>
+    <param name="use_indices" type="bool" value="false"/>
+    <remap from="~input" to="/pointcloud_xyz_full"/>
+    <remap from="~output" to="/pointcloud_xyz"/>
+  </node>
+    
+
   <!-- launch tf publisher for camera position -->
   <node pkg="tf2_ros" type="static_transform_publisher" name="camera_link_broadcaster" args="0.225 0.04 0.01 0 0.2292004 0 0.9733793 front_rail camera_link" />
   

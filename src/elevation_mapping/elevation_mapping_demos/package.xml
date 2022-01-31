@@ -13,6 +13,13 @@
   <depend>elevation_mapping</depend>
   <depend>grid_map_rviz_plugin</depend>
   <depend>rviz</depend>
+  
+  <exec_depend>spot_msgs</exec_depend>
+  <exec_depend>spot_desciption</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  
 <!--   <test_depend>cmake_code_coverage</test_depend> -->
   <test_depend>gtest</test_depend>
 </package>

@@ -79,7 +79,7 @@ $ rosrun traversability_projection traversability_projection_node
 ```
 
 ### Generate data for MiniCheetah IRL project
-```bashg
+```bash
 $ roslaunch dataset_ros_player mini_cheetah_irl.launch
 $ roslaunch elevation_mapping_demos mini_cheetah_irl.launch
 ```
@@ -89,6 +89,7 @@ Modifications for Running the Spot
 
 ### dataset_ros_player launch file
 Need to specify the camera mount angle by changing the static transform publisher parameters in spot.launch. Different poses are labeled in the comment for different rosbag data.
+
 Change the depth camera max cutoff distance in launch file as well for better performance, which is "filter_limit_max".
 
 ### elevation_mapping_demos config
@@ -97,6 +98,14 @@ In the config/elevation_maps/spot.yaml, change the length_in_x, length_in_y, and
 ### elevation_mapping_demos RViZ
 In the Panels, check the Views tab and choose ThirdPersonFollower as the type. Use body as Target Frame for better visualization.
 
+### roslaunch rosbag file
+Use the following code to launch the file for spot_eat_shit, where -s is starting at 150 sec, -u is playing for 68 sec, and -r is running at 0.5 speed.
+```bash
+rosbag play spot_exp_ice.bag --pause --clock -s 150 -u 68 -r 0.5
+```
+
+### rosbag data
+The link to the rosbag data is attached below. https://drive.google.com/drive/folders/1fXs9EayUUSFRNWBDa4t0vk-1nNYNUjeZ?usp=sharing
 
 Citation
 ========

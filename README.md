@@ -82,6 +82,20 @@ $ roslaunch dataset_ros_player mini_cheetah_irl.launch
 $ roslaunch elevation_mapping_demos mini_cheetah_irl.launch
 ```
 
+Modifications for Running the Spot
+========
+
+### dataset_ros_player launch file
+Need to specify the camera mount angle by changing the static transform publisher parameters in spot.launch. Different poses are labeled in the comment for different rosbag data.
+Change the depth camera max cutoff distance in launch file as well for better performance, which is "filter_limit_max".
+
+### elevation_mapping_demos config
+In the config/elevation_maps/spot.yaml, change the length_in_x, length_in_y, and resolution accordingly to tune the mesh size. Used 20.0 for the length and 0.05 for the solution in spot_eat_shit demo.
+
+### elevation_mapping_demos RViZ
+In the Panels, check the Views tab and choose ThirdPersonFollower as the type. Use body as Target Frame for better visualization.
+
+
 Citation
 ========
 An overview of the theoretical and implementation details has been

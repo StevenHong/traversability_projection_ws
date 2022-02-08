@@ -23,9 +23,9 @@
 
   <!-- launch tf publisher for camera position for spot_exp3.bag -->
   <!--node pkg="tf2_ros" type="static_transform_publisher" name="camera_link_broadcaster" args="0.225 0.04 0.01 0 0.2292004 0 0.9733793 front_rail camera_link" /-->
-  <!-- launch tf publisher for camera position for spot_outdoor_snow.bag, spot_eat_shit.bag, and spot_exp_ice.bag -->
+  <!-- launch tf publisher for camera position for spot_exp_ice.bag -->
   <node pkg="tf2_ros" type="static_transform_publisher" name="camera_link_broadcaster" args="0.225 0.04 0.01 0 0.3007058 0 0.953717 front_rail camera_link" />
-  <!-- launch tf publisher for camera position for spot_main_fig2.bag -->
+  <!-- launch tf publisher for camera position for spot_main_fig2.bag and spot_exp5.bag -->
   <!--node pkg="tf2_ros" type="static_transform_publisher" name="camera_link_broadcaster" args="0.264764 0.0175 0.036 0 0.258819 0 0.9659258 front_rail camera_link" /-->
   
   <!-- launch tf publisher for odom frame -->

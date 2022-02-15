@@ -63,7 +63,7 @@ void TraversabilityProjection::colorDepthCallback(const sensor_msgs::ImageConstP
 
 void TraversabilityProjection::project(int width, int height) {
 
-  std::string proj_img_dir = "/media/ganlu/Samsung_T5/0000_mini-cheetah/2021-05-29_Forest_Sidewalk_Rock_Data/traversability/";
+  std::string proj_img_dir = "/home/steven/traversability_image";
   
   if (depth_queue_.size() >= 500 && gridMap_set_) {
     sensor_msgs::PointCloud2 cloud2 = cloud_queue_.front();

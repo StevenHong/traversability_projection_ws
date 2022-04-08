@@ -18,7 +18,6 @@
 #include <message_filters/cache.h>
 #include <message_filters/subscriber.h>
 #include <ros/ros.h>
-#include <sensor_msgs/JointState.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <std_srvs/Empty.h>
 #include <tf/transform_listener.h>
@@ -265,7 +264,6 @@ class ElevationMapping {
   //! ROS subscribers.
   ros::Subscriber pointCloudSubscriber_;  //!< Deprecated, use input_source instead.
   message_filters::Subscriber<geometry_msgs::PoseWithCovarianceStamped> robotPoseSubscriber_;
-  message_filters::Subscriber<sensor_msgs::JointState> robotJointStateSubscriber_;
 
   //! ROS service servers.
   ros::ServiceServer fusionTriggerService_;
@@ -286,11 +284,9 @@ class ElevationMapping {
 
   //! Cache for the robot pose messages.
   message_filters::Cache<geometry_msgs::PoseWithCovarianceStamped> robotPoseCache_;
-  message_filters::Cache<sensor_msgs::JointState> robotJointStateCache_;
 
   //! Size of the cache for the robot pose messages.
   int robotPoseCacheSize_;
-  int robotJointStateCacheSize_;
 
   //! Frame ID of the elevation map
   std::string mapFrameId_;
@@ -305,7 +301,6 @@ class ElevationMapping {
   //! ROS topics for subscriptions.
   std::string pointCloudTopic_;  //!< Deprecated, use input_source instead.
   std::string robotPoseTopic_;
-  std::string robotJointStateTopic_;
 
   //! Elevation map.
   ElevationMap map_;

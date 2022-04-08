@@ -35,7 +35,6 @@ ElevationMapping::ElevationMapping(ros::NodeHandle& nodeHandle)
     : nodeHandle_(nodeHandle),
       inputSources_(nodeHandle_),
       robotPoseCacheSize_(200),
-      robotJointStateCacheSize_(3200),
       map_(nodeHandle),
       robotMotionMapUpdater_(nodeHandle),
       ignoreRobotMotionUpdates_(false),
@@ -81,17 +80,11 @@ void ElevationMapping::setupSubscribers() {  // Handle deprecated point_cloud_to
   }
 
   if (!robotPoseTopic_.empty()) {
-    robotPoseSubscriber_.subscribe(nodeHandle_, robotPoseTopic_, 100);
+    robotPoseSubscriber_.subscribe(nodeHandle_, robotPoseTopic_, 1);
     robotPoseCache_.connectInput(robotPoseSubscriber_);
     robotPoseCache_.setCacheSize(robotPoseCacheSize_);
   } else {
     ignoreRobotMotionUpdates_ = true;
-  }
-
-  if (!robotJointStateTopic_.empty()) {
-    robotJointStateSubscriber_.subscribe(nodeHandle_, robotJointStateTopic_, 500);
-    robotJointStateCache_.connectInput(robotJointStateSubscriber_);
-    robotJointStateCache_.setCacheSize(robotJointStateCacheSize_);
   }
 }
 
@@ -177,10 +170,8 @@ bool ElevationMapping::readParameters() {
   nodeHandle_.param("track_point_x", trackPoint_.x(), 0.0);
   nodeHandle_.param("track_point_y", trackPoint_.y(), 0.0);
   nodeHandle_.param("track_point_z", trackPoint_.z(), 0.0);
-  nodeHandle_.param("robot_joint_state_topic", robotJointStateTopic_, std::string("/JointState"));
 
   nodeHandle_.param("robot_pose_cache_size", robotPoseCacheSize_, 200);
-  nodeHandle_.param("robot_joint_state_cache_size", robotJointStateCacheSize_, 3200);
   ROS_ASSERT(robotPoseCacheSize_ >= 0);
 
   double minUpdateRate;
@@ -413,15 +404,6 @@ void ElevationMapping::pointCloudCallback(const sensor_msgs::PointCloud2ConstPtr
     ROS_ERROR("Adding point cloud to elevation map failed.");
     resetMapUpdateTimer();
     return;
-  }
-
-  // Save robot poses to trajectory
-  if (!map_.cachedFusedMaps_.empty()) {
-    const ros::Time cachedFusedMapTime = ros::Time().fromNSec(map_.cachedFusedMaps_.front().getTimestamp());
-    map_.pastTraj_ = robotPoseCache_.getInterval(robotPoseCache_.getOldestTime(), cachedFusedMapTime);
-    map_.futureTraj_ = robotPoseCache_.getInterval(cachedFusedMapTime, robotPoseCache_.getLatestTime());
-    map_.pastJointStates_ = robotJointStateCache_.getInterval(robotPoseCache_.getOldestTime(), cachedFusedMapTime);
-    map_.futureJointStates_ = robotJointStateCache_.getInterval(cachedFusedMapTime, robotPoseCache_.getLatestTime());
   }
 
   if (publishPointCloud) {

@@ -22,15 +22,11 @@
 #include <boost/thread/recursive_mutex.hpp>
 
 // ROS
-#include <geometry_msgs/PoseWithCovarianceStamped.h>
 #include <ros/ros.h>
-#include <sensor_msgs/JointState.h>
 
 // Elevation Mapping
 #include "elevation_mapping/PointXYZRGBConfidenceRatio.hpp"
 #include "elevation_mapping/postprocessing/PostprocessorPool.hpp"
-
-#include <queue>
 
 namespace elevation_mapping {
 
@@ -333,17 +329,6 @@ class ElevationMap {
   bool enableContinuousCleanup_;
   double visibilityCleanupDuration_;
   double scanningDuration_;
-
-  //! Robot 2d trajectory
-  std::vector<boost::shared_ptr<geometry_msgs::PoseWithCovarianceStamped const>> pastTraj_;
-  std::vector<boost::shared_ptr<geometry_msgs::PoseWithCovarianceStamped const>> futureTraj_;
-
-  //! Robot joint states
-  std::vector<boost::shared_ptr<sensor_msgs::JointState const>> pastJointStates_;
-  std::vector<boost::shared_ptr<sensor_msgs::JointState const>> futureJointStates_;
-
-  //! Cached fused maps
-  std::queue<grid_map::GridMap> cachedFusedMaps_;
 };
 
 }  // namespace elevation_mapping

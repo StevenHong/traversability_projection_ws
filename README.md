@@ -70,6 +70,17 @@ $ rosbag play spot_exp3.bag --pause --clock -k
 ```
 Note: Need to run dataset_rosplayer package first for sim_time.
 
+### Running for Spot dataset with carla simulation
+```bash
+$ roslaunch dataset_ros_player carla.launch
+$ roslaunch elevation_mapping_demos carla.launch
+$ roslaunch traversability_estimation carla.launch
+$ rosrun traversability_projection traversability_projection_node
+$ rosbag play carla-ros-secondary.bag --pause --clock -k
+```
+Note: Need to run dataset_rosplayer package first for sim_time.
+
+
 ### Running for MiniCheetah
 ```bash
 $ roslaunch dataset_ros_player mini_cheetah.launch

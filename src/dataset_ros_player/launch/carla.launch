@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+
+  <param name="use_sim_time" type="bool" value="true"/>
+
+  <!-- launch nodelet -->
+  <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager"/>
+  
+  <!-- launch nodelet loading file -->
+  <node pkg="nodelet" type="nodelet" name="Plus" args="load depth_image_proc/point_cloud_xyz nodelet_manager">
+    <remap from="camera_info" to="/camera/depth/camera_info" />
+    <remap from="image_rect" to="/camera/depth/image_raw" />
+    <remap from="points" to="/pointcloud_xyz_full" />
+  </node>
+  
+  <node pkg="nodelet" type="nodelet" name="pointcloud_trim" args="load pcl/PassThrough nodelet_manager">
+    <param name="filter_limit_max" type="double" value="10.0"/>
+    <param name="use_indices" type="bool" value="false"/>
+    <remap from="~input" to="/pointcloud_xyz_full"/>
+    <remap from="~output" to="/pointcloud_xyz"/>
+  </node>
+    
+
+  <!-- launch tf publisher for camera position for spot_exp3.bag -->
+  <!--node pkg="tf2_ros" type="static_transform_publisher" name="camera_link_broadcaster" args="0.225 0.04 0.01 0 0.2292004 0 0.9733793 front_rail camera_link" /-->
+  <!-- launch tf publisher for camera position for spot_exp_ice.bag -->
+  <!--node pkg="tf2_ros" type="static_transform_publisher" name="camera_link_broadcaster" args="0.225 0.04 0.01 0 0.3007058 0 0.953717 front_rail camera_link" /-->
+  <!-- launch tf publisher for camera position for spot_main_fig2.bag and spot_exp5.bag -->
+  <!--node pkg="tf2_ros" type="static_transform_publisher" name="camera_link_broadcaster" args="0.264764 0.0175 0.036 0 0.258819 0 0.9659258 front_rail camera_link" /-->
+  
+  <!-- launch tf publisher for odom frame -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="odom_broadcaster" args="0 0 0 0 0 0 1 map odom" />
+
+  <!-- launch python publisher -->
+  <node pkg="dataset_ros_player" type="realsenseIntermediateTF_carla.py" name="realsenseIntermediateTF" output="screen"/>
+
+</launch>
